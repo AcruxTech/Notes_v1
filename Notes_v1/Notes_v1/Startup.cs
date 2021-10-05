@@ -26,10 +26,10 @@ namespace Notes_v1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddDbContext<NoteContext>(opt => opt.UseInMemoryDatabase("TestDatabase"));
+            services.AddDbContext<GoodContext>(opt => opt.UseInMemoryDatabase("TestDatabase"));
 
-            services.AddDbContext<NoteContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("NoteContext")));
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
