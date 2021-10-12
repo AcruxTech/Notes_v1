@@ -26,6 +26,8 @@ namespace Notes_v1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            
             services.AddDbContext<NoteContext>(opt => opt.UseInMemoryDatabase("TestDatabase"));
             services.AddDbContext<GoodContext>(opt => opt.UseInMemoryDatabase("TestDatabase"));
 
@@ -39,6 +41,8 @@ namespace Notes_v1
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors(option => option.WithOrigins("http://localhost:8080").AllowAnyMethod());
 
             app.UseRouting();
 
